@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --color-bg-main: #090B10;
+    --color-bg-sidebar: #0D1017;
+    --color-surface-primary: #11151D;
+    --color-surface-secondary: #171D28;
+    --color-surface-elevated: #1D2532;
+    --color-border: #252D3A;
+    --color-text-primary: #F3F5F9;
+    --color-text-secondary: #929BAA;
+    --color-text-muted: #697386;
+    --color-accent-primary: #8B7CFF;
+    --color-accent-secondary: #6C8CFF;
+    --color-success: #32C48D;
+    --color-warning: #E8B45B;
+    --color-error: #F07178;
+  }
+
+  /* Refined Light Theme Tokens */
+  html:not(.dark) {
+    --color-bg-main: #F4F6FB;
+    --color-bg-sidebar: #FFFFFF;
+    --color-surface-primary: #FFFFFF;
+    --color-surface-secondary: #F0F3F9;
+    --color-surface-elevated: #E4E9F3;
+    --color-border: #D1D9E6;
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748B;
+    --color-accent-primary: #6B5AE0;
+    --color-accent-secondary: #4A6EE0;
+    --color-success: #16A34A;
+    --color-warning: #D97706;
+    --color-error: #DC2626;
+  }
+
+  html, body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom high-performance scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #252D3A;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3B465A;
+  }
+}
+
+/* Code editor typography & tabular figures */
+.font-mono-code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Prevent iOS input zoom by ensuring min 16px or explicitly controlled font sizes */
+input, select, textarea {
+  font-size: 14px;
+}
+@media (max-width: 640px) {
+  input, select, textarea {
+    font-size: 14px;
+  }
+}
+
+/* Smooth transitions for interactive elements */
+button, a, input, select, textarea {
+  transition-property: color, background-color, border-color, transform, opacity, box-shadow;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 150ms;
+}
+
+/* Touch responsiveness */
+@media (pointer: coarse) {
+  button, a {
+    min-height: 38px;
+  }
+}

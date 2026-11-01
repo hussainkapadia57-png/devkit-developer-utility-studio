@@ -1,0 +1,6 @@
+{
+  "name": "DevKit — Developer Utility Studio",
+  "description": "One Workspace. Essential Developer Tools. Privacy-first, browser-native developer utilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
