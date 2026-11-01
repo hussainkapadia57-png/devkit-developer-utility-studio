@@ -88,8 +88,15 @@ export const MinifierTool: React.FC = () => {
 
   // Client-side HTML minifier
   const minifyHtml = (html: string): string => {
-    return html
-      .replace(/<!--(?!\[if)[\s\S]*?-->/g, '')
+    let sanitized = html;
+    let previous: string;
+
+    do {
+      previous = sanitized;
+      sanitized = sanitized.replace(/<!--(?!\[if)[\s\S]*?-->/g, '');
+    } while (sanitized !== previous);
+
+    return sanitized
       .replace(/>\s+</g, '><')
       .replace(/\s{2,}/g, ' ')
       .trim();
