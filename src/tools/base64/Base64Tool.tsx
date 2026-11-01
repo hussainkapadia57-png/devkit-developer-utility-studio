@@ -127,11 +127,25 @@ export const Base64Tool: React.FC = () => {
   })();
 
   const imagePreviewSrc = (() => {
-    const candidate = mode === 'decode' ? input : output;
-    if (candidate.startsWith('data:image/')) return candidate;
+    const candidate = (mode === 'decode' ? input : output).trim();
+    const isValidBase64 = (value: string) => /^[A-Za-z0-9+/=_-]+$/.test(value);
+
+    const dataUriMatch = candidate.match(/^data:(image\/(?:png|jpeg|gif|webp));base64,([A-Za-z0-9+/=_-]+)$/i);
+    if (dataUriMatch) {
+      const mime = dataUriMatch[1].toLowerCase();
+      const payload = dataUriMatch[2];
+      if (isValidBase64(payload)) {
+        return `data:${mime};base64,${payload}`;
+      }
+      return null;
+    }
+
+    if (!isValidBase64(candidate)) return null;
+
     if (candidate.startsWith('/9j/')) return `data:image/jpeg;base64,${candidate}`;
     if (candidate.startsWith('iVBORw0KGgo')) return `data:image/png;base64,${candidate}`;
     if (candidate.startsWith('R0lGODlh')) return `data:image/gif;base64,${candidate}`;
+    if (candidate.startsWith('UklGR')) return `data:image/webp;base64,${candidate}`;
     return null;
   })();
 
